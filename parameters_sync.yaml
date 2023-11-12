@@ -1,0 +1,97 @@
+# General Params
+wandb: 0                                         # use wandb track model training, 1:enable, 0:disable
+exp: Sync_Delay_GCN_32                            # format: data_solver_model_nconvs
+elmore_delay: 0                                  # show elmore delay results, 1:enable, 0:disable
+solver: Delay                                    # Delay, Slew
+model: GCN                                      # TREE, GCN, GAT, SAGE, DeepGCN, GraphTrans, NT, Transfer
+batch_size: 32                                   # 32:v9
+lr: 0.0002
+seed: 1234
+sh_gamma: 0.95                                   # lr_scheduler gamma
+lamda: 0.001                                     # balance loss-l1 and loss_TC
+epochs: 5
+max_len: 52                                      # padding length 21:v10, 52:v9
+leaf_num: 18                                     # max leafs 11:v10, 18:v9
+save_pth: "trained_models/"
+data_pth: "traindata/sync/dir/delay/graphs"        # dir: TREE+Transfer, undir: Other Models
+jth_pth: "traindata/sync/jths/graphs"
+csv_pth: "csvs/"
+loss_type: 0                                     # 0:L1, 1:L1+TC, 2:L1+C
+train_cut: 1                                     # measure data efficiency,[0.25, 0.75, 1]
+                                 
+
+# Pos Neg Samples Params
+B: 64                                            # number of target leaf nodes samples in every batch
+M: 1                                             # number of neg samples
+N: 1                                             # number of pos samples
+dist: 2
+
+# TreeCIR Loss Params
+m: 1
+gamma: 1
+
+# TREE & GAT & GCN & SAGE & DeepGCN Params
+conv_in_dim: 1
+conv_hi_dim: 32                                 
+conv_out_dim: 1
+edge_dim: 1
+n_convs: 32
+
+# MLP Params
+mlp_in_dim: 2
+mlp_hi_dim: 32
+mlp_out_dim: 1
+n_mlps: 3
+
+# Transfer Learning Params
+transfer_gnn_model_pth: "trained_models/Sync_Delay_TREE_32"
+transfer_n_mlps: 3
+transfer_mlp_in_dim: 128
+transfer_mlp_hi_dim: 64
+transfer_mlp_out_dim: 1
+
+
+# wandb setting
+wandb_proj: "Sync-Delay"
+
+# GraphTrans Params
+dim_feedforward: 256
+num_encoder_layers: 3
+scheduler: cosine
+pos_encoder: False
+nhead: 4
+transformer_activation: "relu"
+transformer_norm_input: False
+num_encoder_layers_masked: 0
+transformer_prenorm: False
+transformer_dropout: 0.1
+gnn_dropout: 0.1
+gnn_emb_dim: 128
+gnn_num_layer: 16
+gnn_type: gcn
+d_model: 32
+gnn_JK: "last"
+gnn_residual: False
+graph_pooling: 'mean'
+num_features: 1
+max_input_len: 60
+max_seq_len: 60
+trans_mlp_in_dim: 64
+trans_mlp_hi_dim: 32
+trans_mlp_out_dim: 1
+trans_n_mlps: 3
+
+# Neural Tree Params
+radius: 50
+min_diameter: 1
+max_diameter: 1
+input_dim: 1
+output_dim: 1
+conv_block: "GCN"
+hidden_dim: 32
+num_layers: 16
+GAT_hidden_dims: [8, 8]
+GAT_heads: [8, 1]
+dropout: 0.1
+GAT_concats: [True, False]
+
